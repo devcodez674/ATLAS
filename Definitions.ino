@@ -6,6 +6,7 @@
 #include <Adafruit_BMP3XX.h>
 #include <SPIMemory.h>
 #include <Servo.h>
+#include <SparkFun_u-blox_GNSS_v3.h>
 
 volatile bool imuReady = false;
 volatile bool baroReady = false;
@@ -33,4 +34,6 @@ namespace Pins {
     constexpr uint8_t pyroCont1 = ;
     constexpr uint8_t pyroCont2 = ;
 
-}
+};
+
+

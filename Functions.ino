@@ -37,4 +37,13 @@ void initPins(){
   attachInterrupt(digitalPinToInterrupt(Pins::imuInt), imuDataReady, RISING);
   attachInterrupt(digitalPinToInterrupt(Pins::baroInt), baroDataReady, RISING);
 }
+initPeripherals(){
+  myGNSS.setUART1Output(COM_TYPE_UBX);
+  myGNSS.saveConfigSelective(VAL_CFG_SUBSEC_IOPORT);
+  myGNSS.setNavigationFrequency(1);
+   
+  BARO.setTemperatureOversampling(BMP3_OVERSAMPLING_8X);
+  BARO.setPressureOversampling(BMP3_OVERSAMPLING_4X);
+  BARO.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_3);
 
+}
