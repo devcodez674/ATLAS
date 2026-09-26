@@ -10,7 +10,6 @@
 
 volatile bool imuReady = false;
 volatile bool baroReady = false;
-float pressureRef_Hpa = 0;
 
 namespace Pins {
     constexpr uint8_t flashCs = ;
