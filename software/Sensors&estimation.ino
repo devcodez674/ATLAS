@@ -1,10 +1,14 @@
 struct rawData {
+    uint8_t SVno, fixType
+    int16_t pDop
     float ax, ay, az, gx, gy, gz;
-    float pressure, altitude, temperature;
+    int32_t GPSAltitude;
+    float pressure, BaroAltitude, temperature;
 };
 
 struct EstimatedData {
   float pitch, roll, yaw, accelMagnitude;
+  float latitude, longitude;
   float altitude, BatteryVoltage, verticalVelocity;
 };
 
@@ -23,10 +27,12 @@ void readIMU(){
     );
 }
 void readBaro(){
-    baroData.altitude = BARO.readAltitude(SeaLevelPressure_HPA);
-    baroData.pressure = BARO.pressure / 100.0f;
-    baroData.temperature = BARO.temperature;
+    if (BARO.performReading()) {
+        rawData.Baroaltitude = BARO.readAltitude(pressureRef_Hpa);
+        rawData.pressure = BARO.pressure / 100.0f;
+        rawData.temperature = BARO.temperature;
 
+    }
 }
 void findBattVoltage(){
     
