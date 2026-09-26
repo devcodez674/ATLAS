@@ -10,7 +10,15 @@ if (GPS.getPVT()){
 }
 
 bool preFlightCheck(){
-   
+  digitalWrite(imuCs, LOW);
+  IMUwhoami();
+  digitalWrite(imuCs, HIGH);
+  digitalWrite(baroCs, LOW);
+  BAROwhoami();
+  digitalWrite(baroCs, HIGH);
+  
+
+
   if (BARO.performReading()) {
     pressureRef_Hpa = BARO.pressure / 100.0f;
   }

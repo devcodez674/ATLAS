@@ -47,3 +47,38 @@ initPeripherals(){
   BARO.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_3);
 
 }
+
+//safety functions
+IMUwhoami(){
+  setBank(0);
+
+  uint8_t id;
+
+  if (readRegisters(UB0_REG_WHO_AM_I, 1, &id) < 0) {
+    Serial.println("WHO_AM_I read failed!");
+    return 0xFF;
+  }
+
+  Serial.print("WHO_AM_I: 0x");
+  Serial.println(id, HEX);
+  return id;
+}
+
+BAROwhoami() {
+  uint8_t id;
+
+if (readRegisters(0x00, 1, &id) < 0) {
+    Serial.println("BMP388 CHIP_ID read failed!");
+    return -1;
+}
+
+Serial.print("BMP388 CHIP_ID: 0x");
+Serial.println(id, HEX);
+
+if (id != 0x50) {
+    Serial.println("BMP388: WRONG DEVICE");
+    return -2;
+}
+
+Serial.println("BMP388: OK");
+}
